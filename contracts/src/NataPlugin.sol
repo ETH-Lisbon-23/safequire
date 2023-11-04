@@ -34,9 +34,10 @@ contract NataPlugin is BasePluginWithEventMetadata {
             PluginMetadata({
                 name: "Nata Plugin", 
                 version: "1.0.0", 
-                requiresRootAccess: false, 
-                iconUrl: "", 
-                appUrl: "https://google.com"})
+                requiresRootAccess: true, 
+                iconUrl: "https://raw.githubusercontent.com/nata-finance/nata/main/web/public/nata.png", 
+                appUrl: "https://google.com"
+            })
         )
     {}
 
@@ -84,5 +85,22 @@ contract NataPlugin is BasePluginWithEventMetadata {
     function removeFromWhitelist(address account) external {
         whitelistedAddresses[msg.sender][account] = false;
         emit AddressRemovedFromWhitelist(account);
+    }
+
+    function listForSale(uint _price) {
+        // TODO: require msg.sender = this safe
+        // TODO: deploy a safe to store any proceeds from the sale, 
+        // the new safe is owned by this plugin.
+        emit ListedForSale(address(this), price);
+
+    }
+
+    function buy() {
+        // TODO: check if msg.value >= price
+
+        // TODO: transfer ownership of this safe to the buyer
+        // TODO: take ownership of the proceeds safe
+
+        emit Bought(address(this), msg.sender);
     }
 }

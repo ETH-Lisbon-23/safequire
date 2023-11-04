@@ -1,0 +1,440 @@
+{
+  "address": "0x5c996Fbed96e29C6A3BF551C85Ea2033F57fcB87",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "AddressNotWhiteListed",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "safe",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "caller",
+          "type": "address"
+        }
+      ],
+      "name": "CallerIsNotOwner",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "AddressRemovedFromWhitelist",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "AddressWhitelisted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "metadataHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "Metadata",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "addToWhitelist",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISafeProtocolManager",
+          "name": "manager",
+          "type": "address"
+        },
+        {
+          "internalType": "contract ISafe",
+          "name": "safe",
+          "type": "address"
+        },
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "address payable",
+                  "name": "to",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "value",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "data",
+                  "type": "bytes"
+                }
+              ],
+              "internalType": "struct SafeProtocolAction[]",
+              "name": "actions",
+              "type": "tuple[]"
+            },
+            {
+              "internalType": "uint256",
+              "name": "nonce",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "metadataHash",
+              "type": "bytes32"
+            }
+          ],
+          "internalType": "struct SafeTransaction",
+          "name": "safetx",
+          "type": "tuple"
+        }
+      ],
+      "name": "executeFromPlugin",
+      "outputs": [
+        {
+          "internalType": "bytes[]",
+          "name": "data",
+          "type": "bytes[]"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "metadataHash",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "metadataProvider",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "providerType",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "location",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "name",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "removeFromWhitelist",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "requiresRootAccess",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "interfaceId",
+          "type": "bytes4"
+        }
+      ],
+      "name": "supportsInterface",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "whitelistedAddresses",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x8ee0be068a3022a3ce4bfedb497559df85f630fa3f5da4924cfd704eaacba768",
+  "receipt": {
+    "to": "0x914d7Fec6aaC8cd542e72Bca78B30650d45643d7",
+    "from": "0xfa098e621eaC8438CC84e5D26e9EE5123B825350",
+    "contractAddress": null,
+    "transactionIndex": 5,
+    "gasUsed": "1641707",
+    "logsBloom": "0x000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000c0000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004000000000000200001000000000000000000000000000",
+    "blockHash": "0x35aaec9bfead169eb4c62937da79f1b259795197278d48a508f96815a496ef5e",
+    "transactionHash": "0x8ee0be068a3022a3ce4bfedb497559df85f630fa3f5da4924cfd704eaacba768",
+    "logs": [
+      {
+        "transactionIndex": 5,
+        "blockNumber": 9985905,
+        "transactionHash": "0x8ee0be068a3022a3ce4bfedb497559df85f630fa3f5da4924cfd704eaacba768",
+        "address": "0x5c996Fbed96e29C6A3BF551C85Ea2033F57fcB87",
+        "topics": [
+          "0x522c683f99251eea7f3b027592e92a5398e7582983be1f7c0f33715ce025740f",
+          "0x5889b69f327b562f979c3738d302a18cc8dc8640a6b3bc4172ee9f61f4086a6a"
+        ],
+        "data": "0x000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000001e2000000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000012000000000000000000000000000000000000000000000000000000000000001a0000000000000000000000000000000000000000000000000000000000000000b4e61746120506c7567696e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005312e302e30000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004c68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6e6174612d66696e616e63652f6e6174612f6d61696e2f7765622f7075626c69632f6e6174612e706e670000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001268747470733a2f2f676f6f676c652e636f6d0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "logIndex": 5,
+        "blockHash": "0x35aaec9bfead169eb4c62937da79f1b259795197278d48a508f96815a496ef5e"
+      }
+    ],
+    "blockNumber": 9985905,
+    "cumulativeGasUsed": "2133276",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "e9fbda713775e96d0217571bdab90552",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.18+commit.87f61d96\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"AddressNotWhiteListed\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"safe\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"caller\",\"type\":\"address\"}],\"name\":\"CallerIsNotOwner\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"AddressRemovedFromWhitelist\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"AddressWhitelisted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"metadataHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"Metadata\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"addToWhitelist\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISafeProtocolManager\",\"name\":\"manager\",\"type\":\"address\"},{\"internalType\":\"contract ISafe\",\"name\":\"safe\",\"type\":\"address\"},{\"components\":[{\"components\":[{\"internalType\":\"address payable\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"internalType\":\"struct SafeProtocolAction[]\",\"name\":\"actions\",\"type\":\"tuple[]\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"metadataHash\",\"type\":\"bytes32\"}],\"internalType\":\"struct SafeTransaction\",\"name\":\"safetx\",\"type\":\"tuple\"}],\"name\":\"executeFromPlugin\",\"outputs\":[{\"internalType\":\"bytes[]\",\"name\":\"data\",\"type\":\"bytes[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"metadataHash\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"metadataProvider\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"providerType\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"location\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"removeFromWhitelist\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"requiresRootAccess\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"version\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"whitelistedAddresses\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"addToWhitelist(address)\":{\"params\":{\"account\":\"address of the account to be whitelisted\"}},\"executeFromPlugin(address,address,((address,uint256,bytes)[],uint256,bytes32))\":{\"params\":{\"manager\":\"Address of the Safe{Core} Protocol Manager.\",\"safe\":\"Safe account\",\"safetx\":\"SafeTransaction to be executed\"}},\"metadataProvider()\":{\"returns\":{\"location\":\"bytes\",\"providerType\":\"uint256 Type of metadata provider\"}},\"removeFromWhitelist(address)\":{\"params\":{\"account\":\"address of the account to be removed from the whitelist\"}},\"supportsInterface(bytes4)\":{\"details\":\"Returns true if this contract implements the interface defined by `interfaceId`. See the corresponding https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section] to learn more about how these ids are created. This function call must use less than 30 000 gas.\"}},\"title\":\"NataPlugin maintains a mapping that stores information about accounts that are        permitted to execute non-root transactions through a Safe account.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"addToWhitelist(address)\":{\"notice\":\"Adds an account to whitelist mapping.         The caller should be a Safe account.\"},\"executeFromPlugin(address,address,((address,uint256,bytes)[],uint256,bytes32))\":{\"notice\":\"Executes a Safe transaction if the caller is whitelisted for the given Safe account.\"},\"metadataProvider()\":{\"notice\":\"A function that returns information about the type of metadata provider and its location.         For more information on metadata provider, refer to https://github.com/safe-global/safe-core-protocol-specs/.\"},\"name()\":{\"notice\":\"A funtion that returns name of the plugin\"},\"removeFromWhitelist(address)\":{\"notice\":\"Removes an account from whitelist mapping.         The caller should be a Safe account.\"},\"requiresRootAccess()\":{\"notice\":\"A function that indicates if the plugin requires root access to a Safe.\"},\"version()\":{\"notice\":\"A function that returns version of the plugin\"}},\"notice\":\"This plugin does not need Safe owner(s) confirmation(s) to execute Safe txs once enabled         through a Safe{Core} Protocol Manager.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"src/NataPlugin.sol\":\"NataPlugin\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/utils/introspection/IERC165.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts v4.4.1 (utils/introspection/IERC165.sol)\\n\\npragma solidity ^0.8.0;\\n\\n/**\\n * @dev Interface of the ERC165 standard, as defined in the\\n * https://eips.ethereum.org/EIPS/eip-165[EIP].\\n *\\n * Implementers can declare support of contract interfaces, which can then be\\n * queried by others ({ERC165Checker}).\\n *\\n * For an implementation, see {ERC165}.\\n */\\ninterface IERC165 {\\n    /**\\n     * @dev Returns true if this contract implements the interface defined by\\n     * `interfaceId`. See the corresponding\\n     * https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section]\\n     * to learn more about how these ids are created.\\n     *\\n     * This function call must use less than 30 000 gas.\\n     */\\n    function supportsInterface(bytes4 interfaceId) external view returns (bool);\\n}\\n\",\"keccak256\":\"0x447a5f3ddc18419d41ff92b3773fb86471b1db25773e07f877f548918a185bf1\",\"license\":\"MIT\"},\"@safe-global/safe-core-protocol/contracts/DataTypes.sol\":{\"content\":\"// SPDX-License-Identifier: LGPL-3.0-only\\npragma solidity ^0.8.18;\\n\\nstruct SafeProtocolAction {\\n    address payable to;\\n    uint256 value;\\n    bytes data;\\n}\\n\\nstruct SafeTransaction {\\n    SafeProtocolAction[] actions;\\n    uint256 nonce;\\n    bytes32 metadataHash;\\n}\\n\\nstruct SafeRootAccess {\\n    SafeProtocolAction action;\\n    uint256 nonce;\\n    bytes32 metadataHash;\\n}\\n\",\"keccak256\":\"0xfcce6a99ceb499693f9a33aa624affcefcbb9af1fb328f4b2bc4b9f245bb48ba\",\"license\":\"LGPL-3.0-only\"},\"@safe-global/safe-core-protocol/contracts/interfaces/Accounts.sol\":{\"content\":\"// SPDX-License-Identifier: LGPL-3.0-only\\npragma solidity ^0.8.18;\\n\\n/**\\n * @title ISafe Declares the functions that are called on a Safe by Safe{Core} Protocol.\\n */\\ninterface ISafe {\\n    function execTransactionFromModule(\\n        address payable to,\\n        uint256 value,\\n        bytes calldata data,\\n        uint8 operation\\n    ) external returns (bool success);\\n\\n    function execTransactionFromModuleReturnData(\\n        address to,\\n        uint256 value,\\n        bytes memory data,\\n        uint8 operation\\n    ) external returns (bool success, bytes memory returnData);\\n}\\n\",\"keccak256\":\"0xa3dd0d1c1c701479d294e384c4350e3829e69045a2c740a62da353eac45ef258\",\"license\":\"LGPL-3.0-only\"},\"@safe-global/safe-core-protocol/contracts/interfaces/Integrations.sol\":{\"content\":\"// SPDX-License-Identifier: LGPL-3.0-only\\npragma solidity ^0.8.18;\\nimport {ISafe} from \\\"./Accounts.sol\\\";\\nimport {SafeTransaction, SafeRootAccess} from \\\"../DataTypes.sol\\\";\\nimport {IERC165} from \\\"@openzeppelin/contracts/utils/introspection/IERC165.sol\\\";\\n\\n/**\\n * @title ISafeProtocolFunctionHandler - An interface that a Safe function handler should implement to handle static calls.\\n * @notice In Safe{Core} Protocol, a function handler can be used to add additional functionality to a Safe.\\n *         User(s) should add SafeProtocolManager as a function handler (aka fallback handler in Safe v1.x) to the Safe\\n *         and enable the contract implementing ISafeProtocolFunctionHandler interface as a function handler in the\\n *         SafeProtocolManager for the specific function identifier.\\n */\\ninterface ISafeProtocolFunctionHandler is IERC165 {\\n    /**\\n     * @notice Handles calls to the Safe contract forwarded by the fallback function.\\n     * @param safe A Safe instance\\n     * @param sender Address of the sender\\n     * @param value Amount of ETH\\n     * @param data Arbitrary length bytes\\n     * @return result Arbitrary length bytes containing result of the operation\\n     */\\n    function handle(ISafe safe, address sender, uint256 value, bytes calldata data) external returns (bytes memory result);\\n\\n    /**\\n     * @notice A function that returns information about the type of metadata provider and its location.\\n     *         For more information on metadata provider, refer to https://github.com/safe-global/safe-core-protocol-specs/.\\n     * @return providerType uint256 Type of metadata provider\\n     * @return location bytes\\n     */\\n    function metadataProvider() external view returns (uint256 providerType, bytes memory location);\\n}\\n\\n/**\\n * @title ISafeProtocolStaticFunctionHandler - An interface that a Safe functionhandler should implement in case when handling static calls\\n * @notice In Safe{Core} Protocol, a function handler can be used to add additional functionality to a Safe.\\n *         User(s) should add SafeProtocolManager as a function handler (aka fallback handler in Safe v1.x) to the Safe\\n *         and enable the contract implementing ISafeProtocolStaticFunctionHandler interface as a function handler in the\\n *         SafeProtocolManager for the specific function identifier.\\n */\\ninterface ISafeProtocolStaticFunctionHandler is IERC165 {\\n    /**\\n     * @notice Handles static calls to the Safe contract forwarded by the fallback function.\\n     * @param safe A Safe instance\\n     * @param sender Address of the sender\\n     * @param value Amount of ETH\\n     * @param data Arbitrary length bytes\\n     * @return result Arbitrary length bytes containing result of the operation\\n     */\\n    function handle(ISafe safe, address sender, uint256 value, bytes calldata data) external view returns (bytes memory result);\\n\\n    /**\\n     * @notice A function that returns information about the type of metadata provider and its location.\\n     *         For more information on metadata provider, refer to https://github.com/safe-global/safe-core-protocol-specs/.\\n     * @return providerType uint256 Type of metadata provider\\n     * @return location bytes\\n     */\\n    function metadataProvider() external view returns (uint256 providerType, bytes memory location);\\n}\\n\\n/**\\n * @title ISafeProtocolHooks - An interface that a contract should implement to be enabled as hooks.\\n * @notice In Safe{Core} Protocol, hooks can approve or deny transactions based on the logic it implements.\\n */\\ninterface ISafeProtocolHooks is IERC165 {\\n    /**\\n     * @notice A function that will be called by a Safe before the execution of a transaction if the hooks are enabled\\n     * @dev Add custom logic in this function to validate the pre-state and contents of transaction for non-root access.\\n     * @param safe A Safe instance\\n     * @param tx A struct of type SafeTransaction that contains the details of the transaction.\\n     * @param executionType uint256\\n     * @param executionMeta Arbitrary length of bytes\\n     * @return preCheckData bytes\\n     */\\n    function preCheck(\\n        ISafe safe,\\n        SafeTransaction calldata tx,\\n        uint256 executionType,\\n        bytes calldata executionMeta\\n    ) external returns (bytes memory preCheckData);\\n\\n    /**\\n     * @notice A function that will be called by a safe before the execution of a transaction if the hooks are enabled and\\n     *         transaction requies tool access.\\n     * @dev Add custom logic in this function to validate the pre-state and contents of transaction for root access.\\n     * @param safe A Safe instance\\n     * @param rootAccess DataTypes.SafeRootAccess\\n     * @param executionType uint256\\n     * @param executionMeta bytes\\n     * @return preCheckData bytes\\n     */\\n    function preCheckRootAccess(\\n        ISafe safe,\\n        SafeRootAccess calldata rootAccess,\\n        uint256 executionType,\\n        bytes calldata executionMeta\\n    ) external returns (bytes memory preCheckData);\\n\\n    /**\\n     * @notice A function that will be called by a safe after the execution of a transaction if the hooks are enabled. Hooks should revert if the post state of after the transaction is not as expected.\\n     * @dev Add custom logic in this function to validate the post-state after the transaction is executed.\\n     * @param safe ISafe\\n     * @param success bool\\n     * @param preCheckData Arbitrary length bytes that was returned by during pre-check of the transaction.\\n     */\\n    function postCheck(ISafe safe, bool success, bytes calldata preCheckData) external;\\n}\\n\\n/**\\n * @title ISafeProtocolPlugin - An interface that a Safe plugin should implement\\n */\\ninterface ISafeProtocolPlugin is IERC165 {\\n    /**\\n     * @notice A funtion that returns name of the plugin\\n     * @return name string name of the plugin\\n     */\\n    function name() external view returns (string memory name);\\n\\n    /**\\n     * @notice A function that returns version of the plugin\\n     * @return version string version of the plugin\\n     */\\n    function version() external view returns (string memory version);\\n\\n    /**\\n     * @notice A function that returns information about the type of metadata provider and its location.\\n     *         For more information on metadata provider, refer to https://github.com/safe-global/safe-core-protocol-specs/.\\n     * @return providerType uint256 Type of metadata provider\\n     * @return location bytes\\n     */\\n    function metadataProvider() external view returns (uint256 providerType, bytes memory location);\\n\\n    /**\\n     * @notice A function that indicates if the plugin requires root access to a Safe.\\n     * @return requiresRootAccess True if root access is required, false otherwise.\\n     */\\n    function requiresRootAccess() external view returns (bool requiresRootAccess);\\n}\\n\",\"keccak256\":\"0x31362db1a2641c47d3456c02b31dba8f8b860082ea8d984fae5737d77199a6a7\",\"license\":\"LGPL-3.0-only\"},\"@safe-global/safe-core-protocol/contracts/interfaces/Manager.sol\":{\"content\":\"// SPDX-License-Identifier: LGPL-3.0-only\\npragma solidity ^0.8.18;\\nimport {ISafe} from \\\"./Accounts.sol\\\";\\nimport {SafeRootAccess, SafeTransaction} from \\\"../DataTypes.sol\\\";\\n\\n/**\\n * @title ISafeProtocolManager interface a Manager should implement\\n * @notice A mediator checks the status of the integration through the registry and allows only\\n *         listed and non-flagged integrations to execute transactions. A Safe account should\\n *         add a mediator as a plugin.\\n */\\ninterface ISafeProtocolManager {\\n    /**\\n     * @notice This function allows enabled plugins to execute non-delegate call transactions thorugh a Safe.\\n     *         It should validate the status of the plugin through the registry and allows only listed and non-flagged integrations to execute transactions.\\n     * @param safe Address of a Safe account\\n     * @param transaction SafeTransaction instance containing payload information about the transaction\\n     * @return data Array of bytes types returned upon the successful execution of all the actions. The size of the array will be the same as the size of the actions\\n     *         in case of succcessful execution. Empty if the call failed.\\n     */\\n    function executeTransaction(ISafe safe, SafeTransaction calldata transaction) external returns (bytes[] memory data);\\n\\n    /**\\n     * @notice This function allows enabled plugins to execute delegate call transactions thorugh a Safe.\\n     *         It should validate the status of the plugin through the registry and allows only listed and non-flagged integrations to execute transactions.\\n     * @param safe Address of a Safe account\\n     * @param rootAccess SafeTransaction instance containing payload information about the transaction\\n     * @return data Arbitrary length bytes data returned upon the successful execution. The size of the array will be the same as the size of the actions\\n     *         in case of succcessful execution. Empty if the call failed.\\n     */\\n    function executeRootAccess(ISafe safe, SafeRootAccess calldata rootAccess) external returns (bytes memory data);\\n}\\n\",\"keccak256\":\"0x50c41530ee7788b90e2a12b1669642cb6dd316cde100cfe4ee2eebddd3db7ef6\",\"license\":\"LGPL-3.0-only\"},\"src/Base.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.18;\\n\\nimport {ISafeProtocolPlugin} from \\\"@safe-global/safe-core-protocol/contracts/interfaces/Integrations.sol\\\";\\nimport {IERC165} from \\\"@openzeppelin/contracts/utils/introspection/IERC165.sol\\\";\\n\\nenum MetadataProviderType {\\n    IPFS,\\n    URL,\\n    Contract,\\n    Event\\n}\\n\\ninterface IMetadataProvider {\\n    function retrieveMetadata(bytes32 metadataHash) external view returns (bytes memory metadata);\\n}\\n\\nstruct PluginMetadata {\\n    string name;\\n    string version;\\n    bool requiresRootAccess;\\n    string iconUrl;\\n    string appUrl;\\n}\\n\\nlibrary PluginMetadataOps {\\n    function encode(PluginMetadata memory data) internal pure returns (bytes memory) {\\n        return\\n            abi.encodePacked(\\n                uint8(0x00), // Format\\n                uint8(0x00), // Format version\\n                abi.encode(data.name, data.version, data.requiresRootAccess, data.iconUrl, data.appUrl) // Plugin Metadata\\n            );\\n    }\\n\\n    function decode(bytes calldata data) internal pure returns (PluginMetadata memory) {\\n        require(bytes16(data[0:2]) == bytes16(0x0000), \\\"Unsupported format or format version\\\");\\n        (string memory name, string memory version, bool requiresRootAccess, string memory iconUrl, string memory appUrl) = abi.decode(\\n            data[2:],\\n            (string, string, bool, string, string)\\n        );\\n        return PluginMetadata(name, version, requiresRootAccess, iconUrl, appUrl);\\n    }\\n}\\n\\nabstract contract BasePlugin is ISafeProtocolPlugin {\\n    using PluginMetadataOps for PluginMetadata;\\n\\n    string public name;\\n    string public version;\\n    bool public immutable requiresRootAccess;\\n    bytes32 public immutable metadataHash;\\n\\n    constructor(PluginMetadata memory metadata) {\\n        name = metadata.name;\\n        version = metadata.version;\\n        requiresRootAccess = metadata.requiresRootAccess;\\n        metadataHash = keccak256(metadata.encode());\\n    }\\n\\n    function supportsInterface(bytes4 interfaceId) external view override returns (bool) {\\n        return interfaceId == type(ISafeProtocolPlugin).interfaceId || interfaceId == type(IERC165).interfaceId;\\n    }\\n}\\n\\nabstract contract BasePluginWithStoredMetadata is BasePlugin, IMetadataProvider {\\n    using PluginMetadataOps for PluginMetadata;\\n\\n    bytes private encodedMetadata;\\n\\n    constructor(PluginMetadata memory metadata) BasePlugin(metadata) {\\n        encodedMetadata = metadata.encode();\\n    }\\n\\n    function retrieveMetadata(bytes32 _metadataHash) external view override returns (bytes memory metadata) {\\n        require(metadataHash == _metadataHash, \\\"Cannot retrieve metadata\\\");\\n        return encodedMetadata;\\n    }\\n\\n    function metadataProvider() public view override returns (uint256 providerType, bytes memory location) {\\n        providerType = uint256(MetadataProviderType.Contract);\\n        location = abi.encode(address(this));\\n    }\\n}\\n\\nabstract contract BasePluginWithEventMetadata is BasePlugin {\\n    using PluginMetadataOps for PluginMetadata;\\n\\n    event Metadata(bytes32 indexed metadataHash, bytes data);\\n\\n    constructor(PluginMetadata memory metadata) BasePlugin(metadata) {\\n        emit Metadata(metadataHash, metadata.encode());\\n    }\\n\\n    function metadataProvider() public view override returns (uint256 providerType, bytes memory location) {\\n        providerType = uint256(MetadataProviderType.Event);\\n        location = abi.encode(address(this));\\n    }\\n}\\n\",\"keccak256\":\"0x44c31bf2b97cc976b51dbbae0deb2198459e38c176ff5cca61c8fa717f657b28\",\"license\":\"MIT\"},\"src/NataPlugin.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.18;\\nimport {ISafe} from \\\"@safe-global/safe-core-protocol/contracts/interfaces/Accounts.sol\\\";\\nimport {ISafeProtocolManager} from \\\"@safe-global/safe-core-protocol/contracts/interfaces/Manager.sol\\\";\\nimport {SafeTransaction, SafeProtocolAction} from \\\"@safe-global/safe-core-protocol/contracts/DataTypes.sol\\\";\\nimport {BasePluginWithEventMetadata, PluginMetadata} from \\\"./Base.sol\\\";\\n\\n/**\\n * @title OwnerManager\\n * @dev This interface is defined for use in NataPlugin contract.\\n */\\ninterface OwnerManager {\\n    function isOwner(address owner) external view returns (bool);\\n}\\n\\n/**\\n * @title NataPlugin maintains a mapping that stores information about accounts that are\\n *        permitted to execute non-root transactions through a Safe account.\\n * @notice This plugin does not need Safe owner(s) confirmation(s) to execute Safe txs once enabled\\n *         through a Safe{Core} Protocol Manager.\\n */\\ncontract NataPlugin is BasePluginWithEventMetadata {\\n    // safe account => account => Nata status\\n    mapping(address => mapping(address => bool)) public whitelistedAddresses;\\n\\n    event AddressWhitelisted(address indexed account);\\n    event AddressRemovedFromWhitelist(address indexed account);\\n\\n    error AddressNotWhiteListed(address account);\\n    error CallerIsNotOwner(address safe, address caller);\\n\\n    constructor()\\n        BasePluginWithEventMetadata(\\n            PluginMetadata({\\n                name: \\\"Nata Plugin\\\", \\n                version: \\\"1.0.0\\\", \\n                requiresRootAccess: false, \\n                iconUrl: \\\"https://raw.githubusercontent.com/nata-finance/nata/main/web/public/nata.png\\\", \\n                appUrl: \\\"https://google.com\\\"})\\n        )\\n    {}\\n\\n    /**\\n     * @notice Executes a Safe transaction if the caller is whitelisted for the given Safe account.\\n     * @param manager Address of the Safe{Core} Protocol Manager.\\n     * @param safe Safe account\\n     * @param safetx SafeTransaction to be executed\\n     */\\n    function executeFromPlugin(\\n        ISafeProtocolManager manager,\\n        ISafe safe,\\n        SafeTransaction calldata safetx\\n    ) external returns (bytes[] memory data) {\\n        address safeAddress = address(safe);\\n        // Only Safe owners are allowed to execute transactions to whitelisted accounts.\\n        if (!(OwnerManager(safeAddress).isOwner(msg.sender))) {\\n            revert CallerIsNotOwner(safeAddress, msg.sender);\\n        }\\n\\n        SafeProtocolAction[] memory actions = safetx.actions;\\n        uint256 length = actions.length;\\n        for (uint256 i = 0; i < length; i++) {\\n            if (!whitelistedAddresses[safeAddress][actions[i].to]) revert AddressNotWhiteListed(actions[i].to);\\n        }\\n        // Test: Any tx that updates whitelist of this contract should be blocked\\n        (data) = manager.executeTransaction(safe, safetx);\\n    }\\n\\n    /**\\n     * @notice Adds an account to whitelist mapping.\\n     *         The caller should be a Safe account.\\n     * @param account address of the account to be whitelisted\\n     */\\n    function addToWhitelist(address account) external {\\n        whitelistedAddresses[msg.sender][account] = true;\\n        emit AddressWhitelisted(account);\\n    }\\n\\n    /**\\n     * @notice Removes an account from whitelist mapping.\\n     *         The caller should be a Safe account.\\n     * @param account address of the account to be removed from the whitelist\\n     */\\n    function removeFromWhitelist(address account) external {\\n        whitelistedAddresses[msg.sender][account] = false;\\n        emit AddressRemovedFromWhitelist(account);\\n    }\\n}\\n\",\"keccak256\":\"0xd732d2889bdbc1fedcfa7a58e19933f1877523616b8afff828ee40dfd7cf895c\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60c06040523480156200001157600080fd5b506040518060a001604052806040518060400160405280600b81526020017f4e61746120506c7567696e00000000000000000000000000000000000000000081525081526020016040518060400160405280600581526020017f312e302e3000000000000000000000000000000000000000000000000000000081525081526020016000151581526020016040518060800160405280604c815260200162002327604c913981526020016040518060400160405280601281526020017f68747470733a2f2f676f6f676c652e636f6d0000000000000000000000000000815250815250808060000151600090816200010a919062000495565b5080602001516001908162000120919062000495565b50806040015115156080811515815250506200014781620001ae60201b620008fa1760201c565b8051906020012060a081815250505060a0517f522c683f99251eea7f3b027592e92a5398e7582983be1f7c0f33715ce025740f6200019083620001ae60201b620008fa1760201c565b6040516200019f919062000616565b60405180910390a250620007ec565b606060008083600001518460200151856040015186606001518760800151604051602001620001e2959493929190620006a9565b6040516020818303038152906040526040516020016200020593929190620007ad565b6040516020818303038152906040529050919050565b600081519050919050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b7f4e487b7100000000000000000000000000000000000000000000000000000000600052602260045260246000fd5b600060028204905060018216806200029d57607f821691505b602082108103620002b357620002b262000255565b5b50919050565b60008190508160005260206000209050919050565b60006020601f8301049050919050565b600082821b905092915050565b6000600883026200031d7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff82620002de565b620003298683620002de565b95508019841693508086168417925050509392505050565b6000819050919050565b6000819050919050565b600062000376620003706200036a8462000341565b6200034b565b62000341565b9050919050565b6000819050919050565b620003928362000355565b620003aa620003a1826200037d565b848454620002eb565b825550505050565b600090565b620003c1620003b2565b620003ce81848462000387565b505050565b5b81811015620003f657620003ea600082620003b7565b600181019050620003d4565b5050565b601f82111562000445576200040f81620002b9565b6200041a84620002ce565b810160208510156200042a578190505b620004426200043985620002ce565b830182620003d3565b50505b505050565b600082821c905092915050565b60006200046a600019846008026200044a565b1980831691505092915050565b600062000485838362000457565b9150826002028217905092915050565b620004a0826200021b565b67ffffffffffffffff811115620004bc57620004bb62000226565b5b620004c8825462000284565b620004d5828285620003fa565b600060209050601f8311600181146200050d5760008415620004f8578287015190505b62000504858262000477565b86555062000574565b601f1984166200051d86620002b9565b60005b82811015620005475784890151825560018201915060208501945060208101905062000520565b8683101562000567578489015162000563601f89168262000457565b8355505b6001600288020188555050505b505050505050565b600081519050919050565b600082825260208201905092915050565b60005b83811015620005b85780820151818401526020810190506200059b565b60008484015250505050565b6000601f19601f8301169050919050565b6000620005e2826200057c565b620005ee818562000587565b93506200060081856020860162000598565b6200060b81620005c4565b840191505092915050565b60006020820190508181036000830152620006328184620005d5565b905092915050565b600082825260208201905092915050565b600062000658826200021b565b6200066481856200063a565b93506200067681856020860162000598565b6200068181620005c4565b840191505092915050565b60008115159050919050565b620006a3816200068c565b82525050565b600060a0820190508181036000830152620006c581886200064b565b90508181036020830152620006db81876200064b565b9050620006ec604083018662000698565b81810360608301526200070081856200064b565b905081810360808301526200071681846200064b565b90509695505050505050565b600060ff82169050919050565b60008160f81b9050919050565b600062000749826200072f565b9050919050565b620007656200075f8262000722565b6200073c565b82525050565b600081905092915050565b600062000783826200057c565b6200078f81856200076b565b9350620007a181856020860162000598565b80840191505092915050565b6000620007bb828662000750565b600182019150620007cd828562000750565b600182019150620007df828462000776565b9150819050949350505050565b60805160a051611b156200081260003960006107be0152600061079a0152611b156000f3fe608060405234801561001057600080fd5b506004361061009e5760003560e01c80638ab1d681116100665780638ab1d6811461016f578063be193d271461018b578063c5a1d7f0146101a9578063d3d72d2a146101c7578063e43252d7146101e65761009e565b806301ffc9a7146100a35780630227bad3146100d357806306fdde031461010357806354fd4d501461012157806386f9f8eb1461013f575b600080fd5b6100bd60048036038101906100b891906109cf565b610202565b6040516100ca9190610a17565b60405180910390f35b6100ed60048036038101906100e89190610b04565b6102d4565b6040516100fa9190610cc5565b60405180910390f35b61010b610572565b6040516101189190610d3c565b60405180910390f35b610129610600565b6040516101369190610d3c565b60405180910390f35b61015960048036038101906101549190610d8a565b61068e565b6040516101669190610a17565b60405180910390f35b61018960048036038101906101849190610dca565b6106bd565b005b610193610798565b6040516101a09190610a17565b60405180910390f35b6101b16107bc565b6040516101be9190610e10565b60405180910390f35b6101cf6107e0565b6040516101dd929190610e8e565b60405180910390f35b61020060048036038101906101fb9190610dca565b61081f565b005b60007f3fce835e000000000000000000000000000000000000000000000000000000007bffffffffffffffffffffffffffffffffffffffffffffffffffffffff1916827bffffffffffffffffffffffffffffffffffffffffffffffffffffffff191614806102cd57507f01ffc9a7000000000000000000000000000000000000000000000000000000007bffffffffffffffffffffffffffffffffffffffffffffffffffffffff1916827bffffffffffffffffffffffffffffffffffffffffffffffffffffffff1916145b9050919050565b606060008390508073ffffffffffffffffffffffffffffffffffffffff16632f54bf6e336040518263ffffffff1660e01b81526004016103149190610ecd565b602060405180830381865afa158015610331573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906103559190610f14565b6103985780336040517ffbaeeec100000000000000000000000000000000000000000000000000000000815260040161038f929190610f41565b60405180910390fd5b60008380600001906103aa9190610f79565b906103b591906112bd565b905060008151905060005b818110156104e257600260008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600084838151811061041c5761041b6112d2565b5b60200260200101516000015173ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff166104cf57828181518110610487576104866112d2565b5b6020026020010151600001516040517f9a45f0090000000000000000000000000000000000000000000000000000000081526004016104c69190611360565b60405180910390fd5b80806104da906113aa565b9150506103c0565b508673ffffffffffffffffffffffffffffffffffffffff16630f99191587876040518363ffffffff1660e01b815260040161051e92919061175f565b6000604051808303816000875af115801561053d573d6000803e3d6000fd5b505050506040513d6000823e3d601f19601f8201168201806040525081019061056691906118e0565b93505050509392505050565b6000805461057f90611958565b80601f01602080910402602001604051908101604052809291908181526020018280546105ab90611958565b80156105f85780601f106105cd576101008083540402835291602001916105f8565b820191906000526020600020905b8154815290600101906020018083116105db57829003601f168201915b505050505081565b6001805461060d90611958565b80601f016020809104026020016040519081016040528092919081815260200182805461063990611958565b80156106865780601f1061065b57610100808354040283529160200191610686565b820191906000526020600020905b81548152906001019060200180831161066957829003601f168201915b505050505081565b60026020528160005260406000206020528060005260406000206000915091509054906101000a900460ff1681565b6000600260003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055508073ffffffffffffffffffffffffffffffffffffffff167f535611fb62fa2a833988f283b779e417e996813e44046f521d76c17b5943b08c60405160405180910390a250565b7f000000000000000000000000000000000000000000000000000000000000000081565b7f000000000000000000000000000000000000000000000000000000000000000081565b600060606003808111156107f7576107f6611989565b5b91503060405160200161080a9190610ecd565b60405160208183030381529060405290509091565b6001600260003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055508073ffffffffffffffffffffffffffffffffffffffff167f4f783c179409b4127238bc9c990bc99b9a651666a0d20b51d6c42849eb88466d60405160405180910390a250565b60606000808360000151846020015185604001518660600151876080015160405160200161092c9594939291906119b8565b60405160208183030381529060405260405160200161094d93929190611aa6565b6040516020818303038152906040529050919050565b6000604051905090565b600080fd5b600080fd5b60007fffffffff0000000000000000000000000000000000000000000000000000000082169050919050565b6109ac81610977565b81146109b757600080fd5b50565b6000813590506109c9816109a3565b92915050565b6000602082840312156109e5576109e461096d565b5b60006109f3848285016109ba565b91505092915050565b60008115159050919050565b610a11816109fc565b82525050565b6000602082019050610a2c6000830184610a08565b92915050565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b6000610a5d82610a32565b9050919050565b6000610a6f82610a52565b9050919050565b610a7f81610a64565b8114610a8a57600080fd5b50565b600081359050610a9c81610a76565b92915050565b6000610aad82610a52565b9050919050565b610abd81610aa2565b8114610ac857600080fd5b50565b600081359050610ada81610ab4565b92915050565b600080fd5b600060608284031215610afb57610afa610ae0565b5b81905092915050565b600080600060608486031215610b1d57610b1c61096d565b5b6000610b2b86828701610a8d565b9350506020610b3c86828701610acb565b925050604084013567ffffffffffffffff811115610b5d57610b5c610972565b5b610b6986828701610ae5565b9150509250925092565b600081519050919050565b600082825260208201905092915050565b6000819050602082019050919050565b600081519050919050565b600082825260208201905092915050565b60005b83811015610bd9578082015181840152602081019050610bbe565b60008484015250505050565b6000601f19601f8301169050919050565b6000610c0182610b9f565b610c0b8185610baa565b9350610c1b818560208601610bbb565b610c2481610be5565b840191505092915050565b6000610c3b8383610bf6565b905092915050565b6000602082019050919050565b6000610c5b82610b73565b610c658185610b7e565b935083602082028501610c7785610b8f565b8060005b85811015610cb35784840389528151610c948582610c2f565b9450610c9f83610c43565b925060208a01995050600181019050610c7b565b50829750879550505050505092915050565b60006020820190508181036000830152610cdf8184610c50565b905092915050565b600081519050919050565b600082825260208201905092915050565b6000610d0e82610ce7565b610d188185610cf2565b9350610d28818560208601610bbb565b610d3181610be5565b840191505092915050565b60006020820190508181036000830152610d568184610d03565b905092915050565b610d6781610a52565b8114610d7257600080fd5b50565b600081359050610d8481610d5e565b92915050565b60008060408385031215610da157610da061096d565b5b6000610daf85828601610d75565b9250506020610dc085828601610d75565b9150509250929050565b600060208284031215610de057610ddf61096d565b5b6000610dee84828501610d75565b91505092915050565b6000819050919050565b610e0a81610df7565b82525050565b6000602082019050610e256000830184610e01565b92915050565b6000819050919050565b610e3e81610e2b565b82525050565b600082825260208201905092915050565b6000610e6082610b9f565b610e6a8185610e44565b9350610e7a818560208601610bbb565b610e8381610be5565b840191505092915050565b6000604082019050610ea36000830185610e35565b8181036020830152610eb58184610e55565b90509392505050565b610ec781610a52565b82525050565b6000602082019050610ee26000830184610ebe565b92915050565b610ef1816109fc565b8114610efc57600080fd5b50565b600081519050610f0e81610ee8565b92915050565b600060208284031215610f2a57610f2961096d565b5b6000610f3884828501610eff565b91505092915050565b6000604082019050610f566000830185610ebe565b610f636020830184610ebe565b9392505050565b600080fd5b600080fd5b600080fd5b60008083356001602003843603038112610f9657610f95610f6a565b5b80840192508235915067ffffffffffffffff821115610fb857610fb7610f6f565b5b602083019250602082023603831315610fd457610fd3610f74565b5b509250929050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b61101482610be5565b810181811067ffffffffffffffff8211171561103357611032610fdc565b5b80604052505050565b6000611046610963565b9050611052828261100b565b919050565b600067ffffffffffffffff82111561107257611071610fdc565b5b602082029050602081019050919050565b600080fd5b600080fd5b600080fd5b600080fd5b60006110a282610a32565b9050919050565b6110b281611097565b81146110bd57600080fd5b50565b6000813590506110cf816110a9565b92915050565b6110de81610e2b565b81146110e957600080fd5b50565b6000813590506110fb816110d5565b92915050565b600080fd5b600067ffffffffffffffff82111561112157611120610fdc565b5b61112a82610be5565b9050602081019050919050565b82818337600083830152505050565b600061115961115484611106565b61103c565b90508281526020810184848401111561117557611174611101565b5b611180848285611137565b509392505050565b600082601f83011261119d5761119c611088565b5b81356111ad848260208601611146565b91505092915050565b6000606082840312156111cc576111cb61108d565b5b6111d6606061103c565b905060006111e6848285016110c0565b60008301525060206111fa848285016110ec565b602083015250604082013567ffffffffffffffff81111561121e5761121d611092565b5b61122a84828501611188565b60408301525092915050565b600061124961124484611057565b61103c565b9050808382526020820190506020840283018581111561126c5761126b611083565b5b835b818110156112b357803567ffffffffffffffff81111561129157611290611088565b5b80860161129e89826111b6565b8552602085019450505060208101905061126e565b5050509392505050565b60006112ca368484611236565b905092915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052603260045260246000fd5b6000819050919050565b600061132661132161131c84610a32565b611301565b610a32565b9050919050565b60006113388261130b565b9050919050565b600061134a8261132d565b9050919050565b61135a8161133f565b82525050565b60006020820190506113756000830184611351565b92915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b60006113b582610e2b565b91507fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff82036113e7576113e661137b565b5b600182019050919050565b60006113fd8261132d565b9050919050565b61140d816113f2565b82525050565b600080fd5b600080fd5b600080fd5b6000808335600160200384360303811261143f5761143e61141d565b5b83810192508235915060208301925067ffffffffffffffff82111561146757611466611413565b5b60208202360383131561147d5761147c611418565b5b509250929050565b600082825260208201905092915050565b6000819050919050565b60006114af60208401846110c0565b905092915050565b6114c081611097565b82525050565b60006114d560208401846110ec565b905092915050565b6114e681610e2b565b82525050565b600080833560016020038436030381126115095761150861141d565b5b83810192508235915060208301925067ffffffffffffffff82111561153157611530611413565b5b60018202360383131561154757611546611418565b5b509250929050565b600061155b8385610baa565b9350611568838584611137565b61157183610be5565b840190509392505050565b60006060830161158f60008401846114a0565b61159c60008601826114b7565b506115aa60208401846114c6565b6115b760208601826114dd565b506115c560408401846114ec565b85830360408701526115d883828461154f565b925050508091505092915050565b60006115f2838361157c565b905092915050565b6000823560016060038336030381126116165761161561141d565b5b82810191505092915050565b6000602082019050919050565b600061163b8385611485565b93508360208402850161164d84611496565b8060005b8781101561169157848403895261166882846115fa565b61167285826115e6565b945061167d83611622565b925060208a01995050600181019050611651565b50829750879450505050509392505050565b6116ac81610df7565b81146116b757600080fd5b50565b6000813590506116c9816116a3565b92915050565b60006116de60208401846116ba565b905092915050565b6116ef81610df7565b82525050565b6000606083016117086000840184611422565b858303600087015261171b83828461162f565b9250505061172c60208401846114c6565b61173960208601826114dd565b5061174760408401846116cf565b61175460408601826116e6565b508091505092915050565b60006040820190506117746000830185611404565b818103602083015261178681846116f5565b90509392505050565b600067ffffffffffffffff8211156117aa576117a9610fdc565b5b602082029050602081019050919050565b60006117ce6117c984611106565b61103c565b9050828152602081018484840111156117ea576117e9611101565b5b6117f5848285610bbb565b509392505050565b600082601f83011261181257611811611088565b5b81516118228482602086016117bb565b91505092915050565b600061183e6118398461178f565b61103c565b9050808382526020820190506020840283018581111561186157611860611083565b5b835b818110156118a857805167ffffffffffffffff81111561188657611885611088565b5b80860161189389826117fd565b85526020850194505050602081019050611863565b5050509392505050565b600082601f8301126118c7576118c6611088565b5b81516118d784826020860161182b565b91505092915050565b6000602082840312156118f6576118f561096d565b5b600082015167ffffffffffffffff81111561191457611913610972565b5b611920848285016118b2565b91505092915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052602260045260246000fd5b6000600282049050600182168061197057607f821691505b60208210810361198357611982611929565b5b50919050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052602160045260246000fd5b600060a08201905081810360008301526119d28188610d03565b905081810360208301526119e68187610d03565b90506119f56040830186610a08565b8181036060830152611a078185610d03565b90508181036080830152611a1b8184610d03565b90509695505050505050565b600060ff82169050919050565b60008160f81b9050919050565b6000611a4c82611a34565b9050919050565b611a64611a5f82611a27565b611a41565b82525050565b600081905092915050565b6000611a8082610b9f565b611a8a8185611a6a565b9350611a9a818560208601610bbb565b80840191505092915050565b6000611ab28286611a53565b600182019150611ac28285611a53565b600182019150611ad28284611a75565b915081905094935050505056fea2646970667358221220e58ec05a64fd92124422d0d8b663e6bf2e6be9b19e1bc97332c9b0eb2113f57564736f6c6343000812003368747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6e6174612d66696e616e63652f6e6174612f6d61696e2f7765622f7075626c69632f6e6174612e706e67",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061009e5760003560e01c80638ab1d681116100665780638ab1d6811461016f578063be193d271461018b578063c5a1d7f0146101a9578063d3d72d2a146101c7578063e43252d7146101e65761009e565b806301ffc9a7146100a35780630227bad3146100d357806306fdde031461010357806354fd4d501461012157806386f9f8eb1461013f575b600080fd5b6100bd60048036038101906100b891906109cf565b610202565b6040516100ca9190610a17565b60405180910390f35b6100ed60048036038101906100e89190610b04565b6102d4565b6040516100fa9190610cc5565b60405180910390f35b61010b610572565b6040516101189190610d3c565b60405180910390f35b610129610600565b6040516101369190610d3c565b60405180910390f35b61015960048036038101906101549190610d8a565b61068e565b6040516101669190610a17565b60405180910390f35b61018960048036038101906101849190610dca565b6106bd565b005b610193610798565b6040516101a09190610a17565b60405180910390f35b6101b16107bc565b6040516101be9190610e10565b60405180910390f35b6101cf6107e0565b6040516101dd929190610e8e565b60405180910390f35b61020060048036038101906101fb9190610dca565b61081f565b005b60007f3fce835e000000000000000000000000000000000000000000000000000000007bffffffffffffffffffffffffffffffffffffffffffffffffffffffff1916827bffffffffffffffffffffffffffffffffffffffffffffffffffffffff191614806102cd57507f01ffc9a7000000000000000000000000000000000000000000000000000000007bffffffffffffffffffffffffffffffffffffffffffffffffffffffff1916827bffffffffffffffffffffffffffffffffffffffffffffffffffffffff1916145b9050919050565b606060008390508073ffffffffffffffffffffffffffffffffffffffff16632f54bf6e336040518263ffffffff1660e01b81526004016103149190610ecd565b602060405180830381865afa158015610331573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906103559190610f14565b6103985780336040517ffbaeeec100000000000000000000000000000000000000000000000000000000815260040161038f929190610f41565b60405180910390fd5b60008380600001906103aa9190610f79565b906103b591906112bd565b905060008151905060005b818110156104e257600260008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600084838151811061041c5761041b6112d2565b5b60200260200101516000015173ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff166104cf57828181518110610487576104866112d2565b5b6020026020010151600001516040517f9a45f0090000000000000000000000000000000000000000000000000000000081526004016104c69190611360565b60405180910390fd5b80806104da906113aa565b9150506103c0565b508673ffffffffffffffffffffffffffffffffffffffff16630f99191587876040518363ffffffff1660e01b815260040161051e92919061175f565b6000604051808303816000875af115801561053d573d6000803e3d6000fd5b505050506040513d6000823e3d601f19601f8201168201806040525081019061056691906118e0565b93505050509392505050565b6000805461057f90611958565b80601f01602080910402602001604051908101604052809291908181526020018280546105ab90611958565b80156105f85780601f106105cd576101008083540402835291602001916105f8565b820191906000526020600020905b8154815290600101906020018083116105db57829003601f168201915b505050505081565b6001805461060d90611958565b80601f016020809104026020016040519081016040528092919081815260200182805461063990611958565b80156106865780601f1061065b57610100808354040283529160200191610686565b820191906000526020600020905b81548152906001019060200180831161066957829003601f168201915b505050505081565b60026020528160005260406000206020528060005260406000206000915091509054906101000a900460ff1681565b6000600260003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055508073ffffffffffffffffffffffffffffffffffffffff167f535611fb62fa2a833988f283b779e417e996813e44046f521d76c17b5943b08c60405160405180910390a250565b7f000000000000000000000000000000000000000000000000000000000000000081565b7f000000000000000000000000000000000000000000000000000000000000000081565b600060606003808111156107f7576107f6611989565b5b91503060405160200161080a9190610ecd565b60405160208183030381529060405290509091565b6001600260003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055508073ffffffffffffffffffffffffffffffffffffffff167f4f783c179409b4127238bc9c990bc99b9a651666a0d20b51d6c42849eb88466d60405160405180910390a250565b60606000808360000151846020015185604001518660600151876080015160405160200161092c9594939291906119b8565b60405160208183030381529060405260405160200161094d93929190611aa6565b6040516020818303038152906040529050919050565b6000604051905090565b600080fd5b600080fd5b60007fffffffff0000000000000000000000000000000000000000000000000000000082169050919050565b6109ac81610977565b81146109b757600080fd5b50565b6000813590506109c9816109a3565b92915050565b6000602082840312156109e5576109e461096d565b5b60006109f3848285016109ba565b91505092915050565b60008115159050919050565b610a11816109fc565b82525050565b6000602082019050610a2c6000830184610a08565b92915050565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b6000610a5d82610a32565b9050919050565b6000610a6f82610a52565b9050919050565b610a7f81610a64565b8114610a8a57600080fd5b50565b600081359050610a9c81610a76565b92915050565b6000610aad82610a52565b9050919050565b610abd81610aa2565b8114610ac857600080fd5b50565b600081359050610ada81610ab4565b92915050565b600080fd5b600060608284031215610afb57610afa610ae0565b5b81905092915050565b600080600060608486031215610b1d57610b1c61096d565b5b6000610b2b86828701610a8d565b9350506020610b3c86828701610acb565b925050604084013567ffffffffffffffff811115610b5d57610b5c610972565b5b610b6986828701610ae5565b9150509250925092565b600081519050919050565b600082825260208201905092915050565b6000819050602082019050919050565b600081519050919050565b600082825260208201905092915050565b60005b83811015610bd9578082015181840152602081019050610bbe565b60008484015250505050565b6000601f19601f8301169050919050565b6000610c0182610b9f565b610c0b8185610baa565b9350610c1b818560208601610bbb565b610c2481610be5565b840191505092915050565b6000610c3b8383610bf6565b905092915050565b6000602082019050919050565b6000610c5b82610b73565b610c658185610b7e565b935083602082028501610c7785610b8f565b8060005b85811015610cb35784840389528151610c948582610c2f565b9450610c9f83610c43565b925060208a01995050600181019050610c7b565b50829750879550505050505092915050565b60006020820190508181036000830152610cdf8184610c50565b905092915050565b600081519050919050565b600082825260208201905092915050565b6000610d0e82610ce7565b610d188185610cf2565b9350610d28818560208601610bbb565b610d3181610be5565b840191505092915050565b60006020820190508181036000830152610d568184610d03565b905092915050565b610d6781610a52565b8114610d7257600080fd5b50565b600081359050610d8481610d5e565b92915050565b60008060408385031215610da157610da061096d565b5b6000610daf85828601610d75565b9250506020610dc085828601610d75565b9150509250929050565b600060208284031215610de057610ddf61096d565b5b6000610dee84828501610d75565b91505092915050565b6000819050919050565b610e0a81610df7565b82525050565b6000602082019050610e256000830184610e01565b92915050565b6000819050919050565b610e3e81610e2b565b82525050565b600082825260208201905092915050565b6000610e6082610b9f565b610e6a8185610e44565b9350610e7a818560208601610bbb565b610e8381610be5565b840191505092915050565b6000604082019050610ea36000830185610e35565b8181036020830152610eb58184610e55565b90509392505050565b610ec781610a52565b82525050565b6000602082019050610ee26000830184610ebe565b92915050565b610ef1816109fc565b8114610efc57600080fd5b50565b600081519050610f0e81610ee8565b92915050565b600060208284031215610f2a57610f2961096d565b5b6000610f3884828501610eff565b91505092915050565b6000604082019050610f566000830185610ebe565b610f636020830184610ebe565b9392505050565b600080fd5b600080fd5b600080fd5b60008083356001602003843603038112610f9657610f95610f6a565b5b80840192508235915067ffffffffffffffff821115610fb857610fb7610f6f565b5b602083019250602082023603831315610fd457610fd3610f74565b5b509250929050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b61101482610be5565b810181811067ffffffffffffffff8211171561103357611032610fdc565b5b80604052505050565b6000611046610963565b9050611052828261100b565b919050565b600067ffffffffffffffff82111561107257611071610fdc565b5b602082029050602081019050919050565b600080fd5b600080fd5b600080fd5b600080fd5b60006110a282610a32565b9050919050565b6110b281611097565b81146110bd57600080fd5b50565b6000813590506110cf816110a9565b92915050565b6110de81610e2b565b81146110e957600080fd5b50565b6000813590506110fb816110d5565b92915050565b600080fd5b600067ffffffffffffffff82111561112157611120610fdc565b5b61112a82610be5565b9050602081019050919050565b82818337600083830152505050565b600061115961115484611106565b61103c565b90508281526020810184848401111561117557611174611101565b5b611180848285611137565b509392505050565b600082601f83011261119d5761119c611088565b5b81356111ad848260208601611146565b91505092915050565b6000606082840312156111cc576111cb61108d565b5b6111d6606061103c565b905060006111e6848285016110c0565b60008301525060206111fa848285016110ec565b602083015250604082013567ffffffffffffffff81111561121e5761121d611092565b5b61122a84828501611188565b60408301525092915050565b600061124961124484611057565b61103c565b9050808382526020820190506020840283018581111561126c5761126b611083565b5b835b818110156112b357803567ffffffffffffffff81111561129157611290611088565b5b80860161129e89826111b6565b8552602085019450505060208101905061126e565b5050509392505050565b60006112ca368484611236565b905092915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052603260045260246000fd5b6000819050919050565b600061132661132161131c84610a32565b611301565b610a32565b9050919050565b60006113388261130b565b9050919050565b600061134a8261132d565b9050919050565b61135a8161133f565b82525050565b60006020820190506113756000830184611351565b92915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b60006113b582610e2b565b91507fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff82036113e7576113e661137b565b5b600182019050919050565b60006113fd8261132d565b9050919050565b61140d816113f2565b82525050565b600080fd5b600080fd5b600080fd5b6000808335600160200384360303811261143f5761143e61141d565b5b83810192508235915060208301925067ffffffffffffffff82111561146757611466611413565b5b60208202360383131561147d5761147c611418565b5b509250929050565b600082825260208201905092915050565b6000819050919050565b60006114af60208401846110c0565b905092915050565b6114c081611097565b82525050565b60006114d560208401846110ec565b905092915050565b6114e681610e2b565b82525050565b600080833560016020038436030381126115095761150861141d565b5b83810192508235915060208301925067ffffffffffffffff82111561153157611530611413565b5b60018202360383131561154757611546611418565b5b509250929050565b600061155b8385610baa565b9350611568838584611137565b61157183610be5565b840190509392505050565b60006060830161158f60008401846114a0565b61159c60008601826114b7565b506115aa60208401846114c6565b6115b760208601826114dd565b506115c560408401846114ec565b85830360408701526115d883828461154f565b925050508091505092915050565b60006115f2838361157c565b905092915050565b6000823560016060038336030381126116165761161561141d565b5b82810191505092915050565b6000602082019050919050565b600061163b8385611485565b93508360208402850161164d84611496565b8060005b8781101561169157848403895261166882846115fa565b61167285826115e6565b945061167d83611622565b925060208a01995050600181019050611651565b50829750879450505050509392505050565b6116ac81610df7565b81146116b757600080fd5b50565b6000813590506116c9816116a3565b92915050565b60006116de60208401846116ba565b905092915050565b6116ef81610df7565b82525050565b6000606083016117086000840184611422565b858303600087015261171b83828461162f565b9250505061172c60208401846114c6565b61173960208601826114dd565b5061174760408401846116cf565b61175460408601826116e6565b508091505092915050565b60006040820190506117746000830185611404565b818103602083015261178681846116f5565b90509392505050565b600067ffffffffffffffff8211156117aa576117a9610fdc565b5b602082029050602081019050919050565b60006117ce6117c984611106565b61103c565b9050828152602081018484840111156117ea576117e9611101565b5b6117f5848285610bbb565b509392505050565b600082601f83011261181257611811611088565b5b81516118228482602086016117bb565b91505092915050565b600061183e6118398461178f565b61103c565b9050808382526020820190506020840283018581111561186157611860611083565b5b835b818110156118a857805167ffffffffffffffff81111561188657611885611088565b5b80860161189389826117fd565b85526020850194505050602081019050611863565b5050509392505050565b600082601f8301126118c7576118c6611088565b5b81516118d784826020860161182b565b91505092915050565b6000602082840312156118f6576118f561096d565b5b600082015167ffffffffffffffff81111561191457611913610972565b5b611920848285016118b2565b91505092915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052602260045260246000fd5b6000600282049050600182168061197057607f821691505b60208210810361198357611982611929565b5b50919050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052602160045260246000fd5b600060a08201905081810360008301526119d28188610d03565b905081810360208301526119e68187610d03565b90506119f56040830186610a08565b8181036060830152611a078185610d03565b90508181036080830152611a1b8184610d03565b90509695505050505050565b600060ff82169050919050565b60008160f81b9050919050565b6000611a4c82611a34565b9050919050565b611a64611a5f82611a27565b611a41565b82525050565b600081905092915050565b6000611a8082610b9f565b611a8a8185611a6a565b9350611a9a818560208601610bbb565b80840191505092915050565b6000611ab28286611a53565b600182019150611ac28285611a53565b600182019150611ad28284611a75565b915081905094935050505056fea2646970667358221220e58ec05a64fd92124422d0d8b663e6bf2e6be9b19e1bc97332c9b0eb2113f57564736f6c63430008120033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "addToWhitelist(address)": {
+        "params": {
+          "account": "address of the account to be whitelisted"
+        }
+      },
+      "executeFromPlugin(address,address,((address,uint256,bytes)[],uint256,bytes32))": {
+        "params": {
+          "manager": "Address of the Safe{Core} Protocol Manager.",
+          "safe": "Safe account",
+          "safetx": "SafeTransaction to be executed"
+        }
+      },
+      "metadataProvider()": {
+        "returns": {
+          "location": "bytes",
+          "providerType": "uint256 Type of metadata provider"
+        }
+      },
+      "removeFromWhitelist(address)": {
+        "params": {
+          "account": "address of the account to be removed from the whitelist"
+        }
+      },
+      "supportsInterface(bytes4)": {
+        "details": "Returns true if this contract implements the interface defined by `interfaceId`. See the corresponding https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section] to learn more about how these ids are created. This function call must use less than 30 000 gas."
+      }
+    },
+    "title": "NataPlugin maintains a mapping that stores information about accounts that are        permitted to execute non-root transactions through a Safe account.",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "addToWhitelist(address)": {
+        "notice": "Adds an account to whitelist mapping.         The caller should be a Safe account."
+      },
+      "executeFromPlugin(address,address,((address,uint256,bytes)[],uint256,bytes32))": {
+        "notice": "Executes a Safe transaction if the caller is whitelisted for the given Safe account."
+      },
+      "metadataProvider()": {
+        "notice": "A function that returns information about the type of metadata provider and its location.         For more information on metadata provider, refer to https://github.com/safe-global/safe-core-protocol-specs/."
+      },
+      "name()": {
+        "notice": "A funtion that returns name of the plugin"
+      },
+      "removeFromWhitelist(address)": {
+        "notice": "Removes an account from whitelist mapping.         The caller should be a Safe account."
+      },
+      "requiresRootAccess()": {
+        "notice": "A function that indicates if the plugin requires root access to a Safe."
+      },
+      "version()": {
+        "notice": "A function that returns version of the plugin"
+      }
+    },
+    "notice": "This plugin does not need Safe owner(s) confirmation(s) to execute Safe txs once enabled         through a Safe{Core} Protocol Manager.",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 377,
+        "contract": "src/NataPlugin.sol:NataPlugin",
+        "label": "name",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_string_storage"
+      },
+      {
+        "astId": 379,
+        "contract": "src/NataPlugin.sol:NataPlugin",
+        "label": "version",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_string_storage"
+      },
+      {
+        "astId": 596,
+        "contract": "src/NataPlugin.sol:NataPlugin",
+        "label": "whitelistedAddresses",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_mapping(t_address,t_mapping(t_address,t_bool))"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_mapping(t_address,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      },
+      "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => mapping(address => bool))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_address,t_bool)"
+      },
+      "t_string_storage": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}

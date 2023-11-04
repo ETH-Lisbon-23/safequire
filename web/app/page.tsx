@@ -6,6 +6,7 @@ import { ethers } from 'ethers'
 import { EthersAdapter } from '@safe-global/protocol-kit'
 import SafeApiKit, { TokenInfoListResponse, SafeInfoResponse } from '@safe-global/api-kit'
 import Safe from '@safe-global/protocol-kit'
+import Image from 'next/image'
 
 // import { getBalanceTokens } from './services/BalanceToken';
 import axios from 'axios';
@@ -79,7 +80,10 @@ export default function Home() {
     <>
       <w3m-button />
       <main className={styles.main}>
-        List Wallets<br />
+        <div>
+          <Image src="/nata.png" alt="Nata Finance Logo" width={100} height={100} />
+        </div>
+        <h2 className={styles.title}>M&A Wallets</h2>
         address: { safeAddress }<br />
         balance: { balance } ETH<br />
 

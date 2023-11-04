@@ -1,95 +1,61 @@
-import Image from 'next/image'
+'use client'
+
+import React, { useEffect } from 'react';
 import styles from './page.module.css'
+import { ethers } from 'ethers'
+import { EthersAdapter } from '@safe-global/protocol-kit'
+import SafeApiKit, { TokenInfoListResponse, SafeInfoResponse } from '@safe-global/api-kit'
+import Safe, { SafeFactory } from '@safe-global/protocol-kit'
+
+
+// https://chainlist.org/?search=goerli&testnets=true
 
 export default function Home() {
+  const [balance, setBalance] = React.useState("0");
+  const safeAddress = '0xAecDFD3A19f777F0c03e6bf99AAfB59937d6467b'
+
+  useEffect(() => {
+    async function fetchData() {
+      // const RPC_URL = 'https://ethereum-goerli.publicnode.com';
+      const RPC_URL='https://goerli.infura.io/v3/66e8fb8d96bd479b973af21abddb7ca2'
+
+      const provider = new ethers.providers.JsonRpcProvider({ url: RPC_URL });
+
+      const ethAdapter = new EthersAdapter({
+        ethers,
+        signerOrProvider: provider,
+      });
+
+      const safeService = new SafeApiKit({
+        txServiceUrl: 'https://safe-transaction-goerli.safe.global',
+        ethAdapter,
+      });
+
+      console.log("============= SafeService: ", safeService);
+      console.log("============= ethAdapter: ", await ethAdapter.getChainId());
+      console.log("============= provider network: ", await provider.getNetwork())
+      console.log("============= provider: ", provider.connection);
+      const safeInfo: SafeInfoResponse = await safeService.getSafeInfo(safeAddress);
+      const tokens: TokenInfoListResponse = await safeService.getTokenList()
+
+      console.log(safeInfo);
+
+      const safeSdk = await Safe.create({ ethAdapter, safeAddress })
+      const balance = await safeSdk.getBalance();
+      setBalance(ethers.utils.formatEther(balance));
+      console.log("============= safeSdk: ", await safeSdk.getBalance());
+      console.log("============= tokens: ", await safeService.getTokenList());
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+      List Wallets<br />
+      address: { safeAddress }<br />
+      balance: { balance } ETH
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
     </main>
   )
 }

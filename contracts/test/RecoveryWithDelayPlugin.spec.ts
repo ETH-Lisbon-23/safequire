@@ -1,10 +1,10 @@
 import hre, { deployments, ethers } from "hardhat";
 import { expect } from "chai";
-import { getProtocolManagerAddress } from "../src/utils/protocol";
+import { getProtocolManagerAddress } from "../scripts/protocol";
 import { getRecoveryWithDelayPlugin } from "./utils/contracts";
 import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { ISafeProtocolManager__factory } from "../typechain-types";
-import { SafeProtocolAction, SafeRootAccess } from "../src/utils/dataTypes";
+import { SafeProtocolAction, SafeRootAccess } from "../scripts/dataTypes";
 import { MaxUint256, ZeroHash } from "ethers";
 
 describe("RecoverWithDelayPlugin", () => {

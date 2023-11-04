@@ -22,7 +22,7 @@ const argv : any = yargs
 
 const { NODE_URL, MNEMONIC, INFURA_KEY, ETHERSCAN_API_KEY} = process.env;
 
-import "./src/tasks/test_registry"
+import "./tasks/test_registry"
 
 const deterministicDeployment = (network: string): DeterministicDeploymentInfo => {
   const info = getSingletonFactoryInfo(parseInt(network));
@@ -59,8 +59,8 @@ const config: HardhatUserConfig = {
   paths: {
     artifacts: "build/artifacts",
     cache: "build/cache",
-    deploy: "src/deploy",
-    sources: "contracts",
+    deploy: "deploy",
+    sources: "src",
   },
   networks: {
     hardhat: {

@@ -1,9 +1,9 @@
 import "hardhat-deploy";
 import "@nomicfoundation/hardhat-ethers";
 import { task } from "hardhat/config";
-import { getPlugin, getRegistry, getRelayPlugin } from "../../test/utils/contracts";
-import { IntegrationType } from "../utils/constants";
-import { loadPluginMetadata } from "../utils/metadata";
+import { getPlugin, getRegistry, getRelayPlugin } from "../test/utils/contracts";
+import { IntegrationType } from "../scripts/constants";
+import { loadPluginMetadata } from "../scripts/metadata";
 
 task("register-plugin", "Registers the sample Plugin in the Safe{Core} test register")
     .setAction(async (_, hre) => {

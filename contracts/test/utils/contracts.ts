@@ -8,7 +8,7 @@ import {
     NataPlugin,
 } from "../../typechain-types";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
-import { getProtocolRegistryAddress } from "../../src/utils/protocol";
+import { getProtocolRegistryAddress } from "../../scripts/protocol";
 
 export const getInstance = async <T extends BaseContract>(
     hre: HardhatRuntimeEnvironment,

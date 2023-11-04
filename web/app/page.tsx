@@ -5,13 +5,34 @@ import styles from './page.module.css'
 import { ethers } from 'ethers'
 import { EthersAdapter } from '@safe-global/protocol-kit'
 import SafeApiKit, { TokenInfoListResponse, SafeInfoResponse } from '@safe-global/api-kit'
-import Safe, { SafeFactory } from '@safe-global/protocol-kit'
+import Safe from '@safe-global/protocol-kit'
+
+// import { getBalanceTokens } from './services/BalanceToken';
+import axios from 'axios';
+
+const getBalanceTokens = async (address: string) => {
+  try {
+    const response = await axios.get(`https://safe-transaction-goerli.safe.global/api/v1/safes/0xAecDFD3A19f777F0c03e6bf99AAfB59937d6467b/balances`)
+    const balances = response.data;
+
+    return {
+      status: 'ok',
+      balances
+    };
+  } catch (error) {
+    return {
+      status: 'error',
+      error
+    };
+  }
+};
 
 
 // https://chainlist.org/?search=goerli&testnets=true
 
 export default function Home() {
   const [balance, setBalance] = React.useState("0");
+  const [tokens, setTokens] = React.useState<any>();
   const safeAddress = '0xAecDFD3A19f777F0c03e6bf99AAfB59937d6467b'
 
   useEffect(() => {
@@ -36,7 +57,7 @@ export default function Home() {
       console.log("============= provider network: ", await provider.getNetwork())
       console.log("============= provider: ", provider.connection);
       const safeInfo: SafeInfoResponse = await safeService.getSafeInfo(safeAddress);
-      const tokens: TokenInfoListResponse = await safeService.getTokenList()
+      // const tokens: TokenInfoListResponse = await safeService.getTokenList()
 
       console.log(safeInfo);
 
@@ -45,6 +66,10 @@ export default function Home() {
       setBalance(ethers.utils.formatEther(balance));
       console.log("============= safeSdk: ", await safeSdk.getBalance());
       console.log("============= tokens: ", await safeService.getTokenList());
+      console.log("============= tokens 0x388e3A1BE71A4c37F1585d8276ffDb28b583406A ", await safeService.getToken('0x388e3A1BE71A4c37F1585d8276ffDb28b583406A'));
+      const tokens = await getBalanceTokens(safeAddress);
+      setTokens(tokens);
+      console.log("============= balanceTokens: ", tokens);
     }
 
     fetchData();
@@ -54,7 +79,20 @@ export default function Home() {
     <main className={styles.main}>
       List Wallets<br />
       address: { safeAddress }<br />
-      balance: { balance } ETH
+      balance: { balance } ETH<br />
+
+      {tokens?.balances.map((token:any) => {
+        const tokenBalance = parseFloat(parseFloat(ethers.utils.formatEther(token.balance)).toFixed(2));
+        console.log("==========_________________ token: ", token);
+        if (tokenBalance <= 0 || token.token === null) return null;
+
+        return (
+          <>
+            { tokenBalance } { token.token.symbol } <br />
+          </>
+        )
+      })}
+
 
     </main>
   )

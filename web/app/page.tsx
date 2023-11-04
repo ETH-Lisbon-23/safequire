@@ -4,11 +4,9 @@ import React, { useEffect } from 'react';
 import styles from './page.module.css'
 import { ethers } from 'ethers'
 import { EthersAdapter } from '@safe-global/protocol-kit'
-import SafeApiKit, { TokenInfoListResponse, SafeInfoResponse } from '@safe-global/api-kit'
 import Safe from '@safe-global/protocol-kit'
 import Image from 'next/image'
 
-// import { getBalanceTokens } from './services/BalanceToken';
 import axios from 'axios';
 
 const getBalanceTokens = async (address: string) => {
@@ -29,8 +27,6 @@ const getBalanceTokens = async (address: string) => {
 };
 
 
-// https://chainlist.org/?search=goerli&testnets=true
-
 export default function Home() {
   const [balance, setBalance] = React.useState("0");
   const [tokens, setTokens] = React.useState<any>();
@@ -38,39 +34,18 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      // const RPC_URL = 'https://ethereum-goerli.publicnode.com';
       const RPC_URL='https://goerli.infura.io/v3/66e8fb8d96bd479b973af21abddb7ca2'
-
       const provider = new ethers.providers.JsonRpcProvider({ url: RPC_URL });
-
       const ethAdapter = new EthersAdapter({
         ethers,
         signerOrProvider: provider,
       });
-
-      const safeService = new SafeApiKit({
-        txServiceUrl: 'https://safe-transaction-goerli.safe.global',
-        ethAdapter,
-      });
-
-      console.log("============= SafeService: ", safeService);
-      console.log("============= ethAdapter: ", await ethAdapter.getChainId());
-      console.log("============= provider network: ", await provider.getNetwork())
-      console.log("============= provider: ", provider.connection);
-      const safeInfo: SafeInfoResponse = await safeService.getSafeInfo(safeAddress);
-      // const tokens: TokenInfoListResponse = await safeService.getTokenList()
-
-      console.log(safeInfo);
-
       const safeSdk = await Safe.create({ ethAdapter, safeAddress })
       const balance = await safeSdk.getBalance();
       setBalance(ethers.utils.formatEther(balance));
-      console.log("============= safeSdk: ", await safeSdk.getBalance());
-      console.log("============= tokens: ", await safeService.getTokenList());
-      console.log("============= tokens 0x388e3A1BE71A4c37F1585d8276ffDb28b583406A ", await safeService.getToken('0x388e3A1BE71A4c37F1585d8276ffDb28b583406A'));
+
       const tokens = await getBalanceTokens(safeAddress);
       setTokens(tokens);
-      console.log("============= balanceTokens: ", tokens);
     }
 
     fetchData();
@@ -81,25 +56,26 @@ export default function Home() {
       <w3m-button />
       <main className={styles.main}>
         <div>
-          <Image src="/nata.png" alt="Nata Finance Logo" width={100} height={100} />
+          <Image src="/nata.png" alt="Nata Finance Logo" width={120} height={120} />
         </div>
         <h2 className={styles.title}>M&A Wallets</h2>
-        address: { safeAddress }<br />
-        balance: { balance } ETH<br />
+        <div className={styles.card}>
+          <h2>{ safeAddress }</h2>
+          <span>{ balance } ETH</span>
 
-        {tokens?.balances.map((token:any) => {
-          const tokenBalance = parseFloat(parseFloat(ethers.utils.formatEther(token.balance)).toFixed(2));
-          console.log("==========_________________ token: ", token);
-          if (tokenBalance <= 0 || token.token === null) return null;
+          <p>
+          {tokens?.balances.map((token:any) => {
+            const tokenBalance = parseFloat(parseFloat(ethers.utils.formatEther(token.balance)).toFixed(2));
+            if (tokenBalance <= 0 || token.token === null) return null;
 
-          return (
-            <>
-              { tokenBalance } { token.token.symbol } <br />
-            </>
-          )
-        })}
-
-
+            return (
+              <>
+                { tokenBalance } { token.token.symbol } <br />
+              </>
+            )
+          })}
+          </p>
+        </div>
       </main>
     </>
   )

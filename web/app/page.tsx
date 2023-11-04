@@ -76,24 +76,27 @@ export default function Home() {
   }, []);
 
   return (
-    <main className={styles.main}>
-      List Wallets<br />
-      address: { safeAddress }<br />
-      balance: { balance } ETH<br />
+    <>
+      <w3m-button />
+      <main className={styles.main}>
+        List Wallets<br />
+        address: { safeAddress }<br />
+        balance: { balance } ETH<br />
 
-      {tokens?.balances.map((token:any) => {
-        const tokenBalance = parseFloat(parseFloat(ethers.utils.formatEther(token.balance)).toFixed(2));
-        console.log("==========_________________ token: ", token);
-        if (tokenBalance <= 0 || token.token === null) return null;
+        {tokens?.balances.map((token:any) => {
+          const tokenBalance = parseFloat(parseFloat(ethers.utils.formatEther(token.balance)).toFixed(2));
+          console.log("==========_________________ token: ", token);
+          if (tokenBalance <= 0 || token.token === null) return null;
 
-        return (
-          <>
-            { tokenBalance } { token.token.symbol } <br />
-          </>
-        )
-      })}
+          return (
+            <>
+              { tokenBalance } { token.token.symbol } <br />
+            </>
+          )
+        })}
 
 
-    </main>
+      </main>
+    </>
   )
 }

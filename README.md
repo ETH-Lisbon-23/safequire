@@ -26,3 +26,8 @@ This is the main repository for Nata Finance.
 
 ## Interactions Overview
 ![NATA Dataset Diagram](docs/nata-diagram.png)
+
+## Twitter
+
+[Follow us on Twitter](https://twitter.com/NataFinance)
+[Gnosis Chain post](https://twitter.com/NataFinance/status/1721116175281610988)

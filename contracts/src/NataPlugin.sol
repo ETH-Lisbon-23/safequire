@@ -1,106 +1,117 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
+
 import {ISafe} from "@safe-global/safe-core-protocol/contracts/interfaces/Accounts.sol";
 import {ISafeProtocolManager} from "@safe-global/safe-core-protocol/contracts/interfaces/Manager.sol";
-import {SafeTransaction, SafeProtocolAction} from "@safe-global/safe-core-protocol/contracts/DataTypes.sol";
+import {SafeRootAccess, SafeTransaction, SafeProtocolAction} from "@safe-global/safe-core-protocol/contracts/DataTypes.sol";
 import {BasePluginWithEventMetadata, PluginMetadata} from "./Base.sol";
+import {IOwnable} from "./interfaces/IOwnable.sol";
 
 /**
- * @title OwnerManager
- * @dev This interface is defined for use in NataPlugin contract.
- */
-interface OwnerManager {
-    function isOwner(address owner) external view returns (bool);
-}
-
-/**
- * @title NataPlugin maintains a mapping that stores information about accounts that are
- *        permitted to execute non-root transactions through a Safe account.
- * @notice This plugin does not need Safe owner(s) confirmation(s) to execute Safe txs once enabled
- *         through a Safe{Core} Protocol Manager.
+ * @title NataPlugin executes root transactions through 2 Safes to atomically swap
+ * ... the ownership of this safe for another newly-created Safe containing the requested amount of ETH.
  */
 contract NataPlugin is BasePluginWithEventMetadata {
-    // safe account => account => Nata status
-    mapping(address => mapping(address => bool)) public whitelistedAddresses;
+    // ************************************* //
+    // *             Storage               * //
+    // ************************************* //
+    // Reminder: state must be safe-specific
+    mapping(address => Listing) public sellerSafeToListings;
 
-    event AddressWhitelisted(address indexed account);
-    event AddressRemovedFromWhitelist(address indexed account);
+    // ************************************* //
+    // *         Enums / Structs           * //
+    // ************************************* //
+    struct Listing {
+        ISafe sellerSafe;
+        ISafe proceedsSafe;
+        uint256 price;
+        bool sold;
+    }
 
-    error AddressNotWhiteListed(address account);
-    error CallerIsNotOwner(address safe, address caller);
+    // ************************************* //
+    // *              Events               * //
+    // ************************************* //
+    event ListedForSale(address indexed safe, uint price);
+    event OwnerReplaced(address indexed safe, address oldOwner, address newOwner);
+    event Sold(address indexed safe, address indexed buyer);
 
+    // ************************************* //
+    // *            Constructor            * //
+    // ************************************* //
     constructor()
         BasePluginWithEventMetadata(
             PluginMetadata({
-                name: "Nata Plugin", 
-                version: "1.0.0", 
-                requiresRootAccess: true, 
-                iconUrl: "https://raw.githubusercontent.com/nata-finance/nata/main/web/public/nata.png", 
-                appUrl: "https://google.com"
+                name: "Nata Plugin",
+                version: "1.0.0",
+                requiresRootAccess: true,
+                iconUrl: "", //"https://raw.githubusercontent.com/nata-finance/nata/main/web/public/nata.png",
+                appUrl: "https://nata.vercel.app"
             })
         )
-    {}
-
-    /**
-     * @notice Executes a Safe transaction if the caller is whitelisted for the given Safe account.
-     * @param manager Address of the Safe{Core} Protocol Manager.
-     * @param safe Safe account
-     * @param safetx SafeTransaction to be executed
-     */
-    function executeFromPlugin(
-        ISafeProtocolManager manager,
-        ISafe safe,
-        SafeTransaction calldata safetx
-    ) external returns (bytes[] memory data) {
-        address safeAddress = address(safe);
-        // Only Safe owners are allowed to execute transactions to whitelisted accounts.
-        if (!(OwnerManager(safeAddress).isOwner(msg.sender))) {
-            revert CallerIsNotOwner(safeAddress, msg.sender);
-        }
-
-        SafeProtocolAction[] memory actions = safetx.actions;
-        uint256 length = actions.length;
-        for (uint256 i = 0; i < length; i++) {
-            if (!whitelistedAddresses[safeAddress][actions[i].to]) revert AddressNotWhiteListed(actions[i].to);
-        }
-        // Test: Any tx that updates whitelist of this contract should be blocked
-        (data) = manager.executeTransaction(safe, safetx);
+    {
+        // NOP
     }
 
+    // ************************************* //
+    // *         State Modifiers           * //
+    // ************************************* //
+
     /**
-     * @notice Adds an account to whitelist mapping.
-     *         The caller should be a Safe account.
-     * @param account address of the account to be whitelisted
+     * @notice List a Safe for sale.
+     * @param _manager Address of the Safe{Core} Protocol Manager.
+     * @param _safe Safe account for sale
+     * @param _price Price in wei
      */
-    function addToWhitelist(address account) external {
-        whitelistedAddresses[msg.sender][account] = true;
-        emit AddressWhitelisted(account);
+    function listForSale(ISafeProtocolManager _manager, ISafe _safe, uint256 _price) external {
+        require(msg.sender == address(_safe), "Unauthorized");
+
+        ISafe proceedsSafeAddress = ISafe(address(0)); // TODO: deployNewSafe() with address(this) as owner
+
+        sellerSafeToListings[address(_safe)] = Listing({
+            sellerSafe: _safe,
+            proceedsSafe: proceedsSafeAddress,
+            price: _price,
+            sold: false
+        });
+
+        emit ListedForSale(address(this), _price);
     }
 
     /**
-     * @notice Removes an account from whitelist mapping.
-     *         The caller should be a Safe account.
-     * @param account address of the account to be removed from the whitelist
+     * @notice Buy a Safe.
+     * @param _manager Address of the Safe{Core} Protocol Manager.
+     * @param _safe Safe account for sale
      */
-    function removeFromWhitelist(address account) external {
-        whitelistedAddresses[msg.sender][account] = false;
-        emit AddressRemovedFromWhitelist(account);
+    function buy(ISafeProtocolManager _manager, ISafe _safe) external {
+        Listing memory listing = sellerSafeToListings[address(_safe)];
+
+        require(address(listing.proceedsSafe) != address(0), "Not for sale");
+        require(address(listing.proceedsSafe).balance >= listing.price, "Not enough funds");
+        require(listing.sold == false, "Already sold");
+        
+        listing.sold = true; // Check-Effects-Interactions
+
+        // Swap transfer safes ownership
+        address buyer = msg.sender;
+        address seller = IOwnable(address(_safe)).getOwners()[0];
+        _replaceOwner(_manager, _safe, seller, buyer); // Seller -> Buyer
+        _replaceOwner(_manager, listing.proceedsSafe, address(this), seller); // NataPlugin -> Seller
+        
+        emit Sold(address(this), msg.sender);
     }
 
-    function listForSale(uint _price) {
-        // TODO: require msg.sender = this safe
-        // TODO: deploy a safe to store any proceeds from the sale, 
-        // the new safe is owned by this plugin.
-        emit ListedForSale(address(this), price);
+    // ************************************* //
+    // *            Internal               * //
+    // ************************************* //
 
-    }
+    function _replaceOwner(ISafeProtocolManager _manager, ISafe _safe, address _oldOwner, address _newOwner) internal {
+        // Assuming only 1 owner for now
+        // TODO: support multiple owners
+        bytes memory txData = abi.encodeWithSignature("swapOwner(address,address,address)", address(0x1), _oldOwner, _newOwner);
+        SafeProtocolAction memory safeProtocolAction = SafeProtocolAction(payable(address(_safe)), 0, txData);
+        SafeRootAccess memory safeTx = SafeRootAccess(safeProtocolAction, 0, "");
+        _manager.executeRootAccess(_safe, safeTx);
 
-    function buy() {
-        // TODO: check if msg.value >= price
-
-        // TODO: transfer ownership of this safe to the buyer
-        // TODO: take ownership of the proceeds safe
-
-        emit Bought(address(this), msg.sender);
+        emit OwnerReplaced(address(_safe), _oldOwner, _newOwner);
     }
 }

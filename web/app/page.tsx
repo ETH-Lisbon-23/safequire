@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import styles from './page.module.css'
 import { ethers } from 'ethers'
 import { EthersAdapter } from '@safe-global/protocol-kit'
+import { IExecWeb3mail } from "@iexec/web3mail"
 import Safe from '@safe-global/protocol-kit'
 import Image from 'next/image'
 import Button from '@mui/material/Button';
@@ -11,22 +12,7 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-
 import axios from 'axios';
-
-import { IExecWeb3mail } from "@iexec/web3mail"
-
-
-// const sendMail = async (emailContent, protectedData) => {
-// 	const emailSubject = 'You have received an message from a potential acquirer - Nata'
-// 	const result = await web3mail.sendEmail({
-// 		protectedData,
-// 		emailSubject,
-// 		emailContent
-// 	})
-//
-// 	console.log(result)
-// }
 
 const getBalanceTokens = async (address: string) => {
   try {
@@ -50,11 +36,38 @@ export default function Home() {
   const [balance, setBalance] = React.useState("0");
   const [tokens, setTokens] = React.useState<any>();
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => {
-    // TODO: send email
-    setOpen(false)
+  const handleOpen = () => {
+setOpen(true);
   }
+  const [messageContent, setMessageContent] = React.useState("");
+  const handleClose = () => setOpen(false);
+  const handleSendEmail = () => {
+    if (typeof window.ethereum === 'undefined') {
+      console.log('No window.ethereum detected')
+      setOpen(false)
+      return
+    } else {
+      const web3Provider = window.ethereum
+      const web3mail = new IExecWeb3mail(web3Provider)
+      const protectedData = "0x6CdeD5136653D9AafC4A51226f28aC3A6E977E91"
+      const emailSubject = 'You have received an message from a potential acquirer - Nata'
+      const emailContent = messageContent+ ""
+      web3mail.sendEmail({
+          protectedData,
+          emailSubject,
+          emailContent
+      })
+      setOpen(false)
+    }
+  };
+  const handleSendNotification= () => {
+    // To be completed (see protectData repository)
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMessageContent(event.target.value);
+  };
+
   const safeAddress = '0xAecDFD3A19f777F0c03e6bf99AAfB59937d6467b'
   const style = {
     position: 'absolute' as 'absolute',
@@ -83,8 +96,6 @@ export default function Home() {
       const tokens = await getBalanceTokens(safeAddress);
       setTokens(tokens);
 
-      // const iexProvider = new ethers.providers.Web3Provider(window.ethereum)
-      // const web3mail = new IExecWeb3mail(iexProvider)
     }
 
     fetchData();
@@ -114,7 +125,7 @@ export default function Home() {
             )
           })}
           </p>
-          <Button variant="contained" onClick={handleOpen} sx={{backgroundColor: 'orange', float: 'right'}} >Contact</Button>
+          <Button variant="contained" onClick={handleOpen} sx={{float: 'right'}} >Contact</Button>
           <Modal
             open={open}
             onClose={handleClose}
@@ -126,9 +137,14 @@ export default function Home() {
               <div style={{display: 'grid', flexDirection: 'row' }}>
               <TextField
                 id="outlined-basic" label="Contact DAO privately" variant="outlined"
-                sx={{marginBottom: '16px'}}
+                sx={{marginBottom: '16px',borderBlockColor: 'black'}}
+                onChange={handleInputChange}
               />
-              <Button variant="contained" onClick={handleClose}>Send</Button>
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <Button variant="contained" onClick={handleSendEmail}>Send email</Button>
+                <Button variant="contained" onClick={handleSendNotification}>Send notification</Button>
+              </div>
+
               </div>
             </Box>
           </Modal>

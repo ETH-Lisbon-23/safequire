@@ -105,3 +105,12 @@ a {
     color-scheme: dark;
   }
 }
+
+button {
+  background-color: orange !important;
+
+}
+button:hover {
+  background-color: #ff8c00 !important;
+  /* transform: scale(1.05); */
+}

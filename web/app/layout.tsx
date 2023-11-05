@@ -31,6 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <link rel="icon" href="/nata.png" />
       <WagmiConfig config={wagmiConfig}>
         <body className={inter.className}>{children}</body>
       </WagmiConfig>
